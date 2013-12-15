@@ -11,6 +11,7 @@
     - python-pip
     - python-virtualenv
     - python-openssl
+    - openssl-devel
     - libsnappy-dev
     - git
     - curl
@@ -25,5 +26,7 @@
     - mdadm
     - btrfs-tools
     - unzip
+    - uwsgi
+
 
 #      shell: apt-get install --yes  executable=/bin/bash
