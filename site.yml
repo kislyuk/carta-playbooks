@@ -1,0 +1,7 @@
+---
+- hosts: cartographer
+  remote_user: kislyuk
+  sudo: yes
+  roles:
+    - common
+    - cartographer

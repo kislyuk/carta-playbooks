@@ -1,0 +1,29 @@
+---
+- name: install base requirements
+  apt: name={{item}} state=installed
+  with_items:
+    - tmux
+    - screen
+    - keychain
+    - nginx
+    - htop
+    - python-dev
+    - python-pip
+    - python-virtualenv
+    - python-openssl
+    - libsnappy-dev
+    - git
+    - curl
+    - pandoc
+    - lxc
+    - ufw
+    - bridge-utils
+    - whois
+    - ntp
+    - build-essential
+    - cryptsetup-bin
+    - mdadm
+    - btrfs-tools
+    - unzip
+
+#      shell: apt-get install --yes  executable=/bin/bash
