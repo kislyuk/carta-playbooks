@@ -1,3 +1,6 @@
 ---
 - name: install cartographer
   shell: echo BEGIN > /tmp/SLUG executable=/bin/bash
+
+- name: set hostname
+  hostname: name=cartographer

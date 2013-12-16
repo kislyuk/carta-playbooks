@@ -1,0 +1,4 @@
+---
+- name: configure screen
+  template: src=../templates/bash_profile dest=~kislyuk/.bash_profile
+  template: src=../templates/screenrc dest=~kislyuk/.screenrc

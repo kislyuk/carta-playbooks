@@ -4,4 +4,6 @@
   sudo: yes
   roles:
     - common
+    - head
     - cartographer
+    - mongod
