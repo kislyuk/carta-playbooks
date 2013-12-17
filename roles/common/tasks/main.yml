@@ -26,6 +26,18 @@
     - btrfs-tools
     - unzip
     - uwsgi
+    - colordiff
+    - pydf
+    - xfsprogs
 
+- name: install bashrc
+  sudo: no
+  template: src=bashrc dest=~/.bashrc
+
+- name: format ephemeral storage
+  script: assemble_ephemeral_RAID
+
+- name: mount ephemeral storage
+  mount: name=/mnt/ephemeral-raid src='LABEL=ephemeral-raid' state=mounted fstype=auto
 
 #      shell: apt-get install --yes  executable=/bin/bash

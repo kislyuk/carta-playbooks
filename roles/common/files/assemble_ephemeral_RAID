@@ -1,0 +1,19 @@
+#!/bin/bash -e
+
+if [[ -f /dev/disk/by-label/ephemeral-raid ]]; then
+    echo "$(basename $0): /dev/disk/by-label/ephemeral-raid exists, quitting"
+    exit
+fi
+
+RAID_LEVEL=0
+
+EPHEMERAL_DEVICES=($(find /dev/xvd? -type b))
+
+echo "Creating RAID${RAID_LEVEL} array on $EPHEMERAL_DEVICES"
+
+umount /mnt || true
+mdadm --stop /dev/md0 || true
+sed -i -e '/xvdb/ d' /etc/fstab
+
+yes|mdadm --create --force --verbose /dev/md0 --level=$RAID_LEVEL --raid-devices=${#EPHEMERAL_DEVICES[@]} ${EPHEMERAL_DEVICES[@]}
+mkfs.ext4 -L ephemeral-raid -q -E lazy_itable_init /dev/md0

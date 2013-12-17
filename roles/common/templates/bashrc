@@ -1,0 +1,152 @@
+[[ -f /etc/profile ]] && source /etc/profile
+
+export PAGER="less -RS"
+export EDITOR=emacs
+export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/sbin:/usr/sbin:$PATH"
+export PERL5LIB="$PERL5LIB:$HOME/lib/perl"
+export R_LIBS_USER="${HOME}/lib/R"
+export LD_LIBRARY_PATH="${HOME}/lib:$LD_LIBRARY_PATH"
+export PYTHONPATH="${HOME}/lib/python:$PYTHONPATH"
+
+if [ "$PS1" ]; then
+    PROMPT_COMMAND='history -a' #;history -n'
+    type -t colordiff >/dev/null 2>&1 && alias diff='colordiff'
+    type -t htop >/dev/null 2>&1 && alias top='htop'
+    type -t pydf >/dev/null 2>&1 && alias df='pydf'
+    [[ -f /etc/profile.d/bash-completion ]] && source /etc/profile.d/bash-completion
+    [[ -f /etc/bash_completion ]] && source /etc/bash_completion
+    [[ -f /usr/local/etc/bash_completion ]] && source /usr/local/etc/bash_completion
+    export HISTCONTROL=ignoredups:ignorespace
+    export ECHANGELOG_USER="Andrey Kislyuk <weaver@gentoo.org>"
+    export PORTAGE_GPG_DIR="${HOME}/.gnupg/"
+    export PORTAGE_GPG_KEY=16E7D8E6
+    export GIT_AUTHOR_NAME="Andrey Kislyuk"
+    export GIT_AUTHOR_EMAIL='kislyuk@gmail.com'
+
+    export DEBFULLNAME='Andrey Kislyuk'
+    export DEBEMAIL='kislyuk@gmail.com'
+    export CLICOLOR=on
+
+    alias loggedin='who|cut -f 1 -d " "|sort|uniq'
+    alias cd..='cd ..'
+    alias grep='grep --color=auto'
+    alias hi='history'
+    alias j='jobs -l'
+    alias ls='ls -h --color=auto'
+    alias mv='mv -i'
+    alias rn='rn -q'
+    alias dir='ls -h --color=auto'
+    alias move='mv'
+    alias quit='exit'
+    alias cls='clear'
+    alias lsa='ls -lhA --color=auto'
+    alias lss='ls -lhAS --color=auto' # size
+    alias lsrs='ls -lhArS -h --color=auto'
+    alias lst='ls -lhAt --color=auto' # date
+    alias lsrt='ls -lhArt --color=auto'
+    alias lsx='ls -lhAX --color=auto' # extension
+    alias lsrx='ls -lhArX --color=auto'
+    alias lr='ls -lR --color=auto' # recurse
+    alias lsd='find . -maxdepth 1 -type d'
+    alias psa='ps -Alfww --forest --headers|less'
+    alias cp='cp -i'
+    alias copy='cp -i'
+    alias path='echo -e ${PATH//:/\\n}'
+    alias du='du -h'
+    alias tree='tree -Cs'
+    alias makepatch='diff -u --ignore-space-change'
+    alias hl='grep --color=yes --context=1000000'
+    alias qdel_me='qstat|grep ${USER}|cut -f 1 -d " "|xargs qdel'
+    alias check_md='cat /proc/mdstat; for i in store diamond onyx; do echo $i; ssh $i cat /proc/mdstat; done; sudo ssh store tw_cli show'
+
+    alias archive_init='(pushd ~/archive && git clone ssh://horizon/~/archive.git)'
+    alias archive_push='(pushd ~/archive && git commit --all -m "archive push" && git push ssh://horizon/~/archive.git master)'
+    alias archive_pull='(pushd ~/archive/archive && git pull)'
+
+# this is all very nice and wonderful but deathly slow
+    C_BOLD=$(tput bold)
+#	C_BLACK=$(tput setaf 0)
+#	C_RED=$(tput setaf 1)
+#	C_GREEN=$(tput setaf 2)
+#	C_BROWN=$(tput setaf 3)
+    C_BLUE=$(tput setaf 4)
+#	C_PURPLE=$(tput setaf 5)
+#	C_CYAN=$(tput setaf 6)
+#	C_LIGHT_GREY=$(tput setaf 7)
+#	C_DARK_GREY=$(tput bold; tput setaf 0)
+    C_LIGHT_RED=$(tput bold; tput setaf 1)
+#	C_LIGHT_GREEN=$(tput bold; tput setaf 2)
+#	C_YELLOW=$(tput bold; tput setaf 3)
+#	C_BRIGHT_BLUE=$(tput bold; tput setaf 4)
+#	C_PINK=$(tput bold; tput setaf 5)
+#	C_BRIGHT_CYAN=$(tput bold; tput setaf 6)
+#	C_WHITE=$(tput bold; tput setaf 7)
+#	C_BG_BLACK=$(tput setab 0)
+#	C_BG_RED=$(tput setab 1)
+#	C_BG_GREEN=$(tput setab 2)
+#	C_BG_BROWN=$(tput setab 3)
+#	C_BG_BLUE=$(tput setab 4)
+#	C_BG_PURPLE=$(tput setab 5)
+#	C_BG_CYAN=$(tput setab 6)
+#	C_BG_LIGHT_GREY=$(tput setab 7)
+    C_RESET=$(tput sgr0)
+#	for i in ${!C_*}; do; done
+	
+    stty werase '^_' # set Ctrl+Backspace to delete prev word
+    stty -ixon # disable flow control (ctrl+S/ctrl+Q)
+
+    if [[ $EUID == 0 ]]; then
+	export PS1="\[$C_LIGHT_RED\]\u@\h\[$C_RESET\]\[$C_BOLD\]:\[$C_BLUE\]\w\[$C_RESET\]# "
+    else
+	[[ -f $HOME/.keychain/$HOSTNAME-sh ]] && source $HOME/.keychain/$HOSTNAME-sh
+	[[ -f /usr/local/bin/start-keychain ]] && source /usr/local/bin/start-keychain
+	[[ -f $HOME/bin/start-keychain ]] && source $HOME/bin/start-keychain
+	[[ -f $HOME/.sunriserc ]] && source $HOME/.sunriserc
+	export PS1="\[$C_LIGHT_RED\]\u@\h\[$C_RESET\]\[$C_BOLD\]:\[$C_BLUE\]\w\[$C_RESET\]\[$C_BOLD\]>\[$C_RESET\]"
+	export HISTSIZE=80000
+	export HISTFILESIZE=80000
+	export HISTCONTROL="ignoredups"
+	function ff() { find . -name '*'$1'*' ; }
+	function fe() { find . -name '*'$1'*' -exec $2 {} \; ; }
+	function fstr() { # find a string in a set of files
+	    if [ "$#" -gt 2 ]; then
+		echo "Usage: fstr \"pattern\" [files] "
+		return;
+	    fi
+	    SMSO=$(tput smso)
+	    RMSO=$(tput rmso)
+	    find . -type f -name "${2:-*}" -print | xargs grep -sin "$1" | \
+		sed "s/$1/$SMSO$1$RMSO/gI"
+	}
+	function swap() {
+	    local TMPFILE=tmp.$$
+	    mv $1 $TMPFILE
+	    mv $2 $1
+	    mv $TMPFILE $2
+	}
+		
+	shopt -s cdspell extglob dotglob histappend globstar
+	set visible-stats on
+    fi
+    function __disabled() {
+        echo -ne '\e]10;#839496\a'  # foreground
+        echo -ne '\e]11;#002b36\a'  # background
+        echo -ne '\e]12;#d33682\a'  # cursor
+        echo -ne '\e]4;0;#586E75\a'   # black
+        echo -ne '\e]4;1;#D30102\a'   # red
+        echo -ne '\e]4;2;#859900\a'   # green
+        echo -ne '\e]4;3;#B58900\a'   # yellow
+        echo -ne '\e]4;4;#268BD2\a'   # blue
+        echo -ne '\e]4;5;#D33682\a'   # magenta
+        echo -ne '\e]4;6;#2aa198\a'   # cyan
+        echo -ne '\e]4;7;#EEE8D5\a'   # white
+        echo -ne '\e]4;8;#586E75\a'   # bold black
+        echo -ne '\e]4;9;#CB4B16\a'   # bold red
+        echo -ne '\e]4;10;#859900\a'  # bold green
+        echo -ne '\e]4;11;#B58900\a'  # bold yellow
+        echo -ne '\e]4;12;#268BD2\a'  # bold blue
+        echo -ne '\e]4;13;#6C71C4\a'  # bold magenta
+        echo -ne '\e]4;14;#2AA1A1\a'  # bold cyan
+        echo -ne '\e]4;15;#fdf6e3\a'  # bold white
+    }
+fi

@@ -9,7 +9,7 @@
 
 - name: MongoDB | Push default configuration template
   template:
-    src=../templates/mongodb.conf.j2
+    src=mongodb.conf.j2
     dest=/etc/mongodb.conf
     owner=root group=root mode=0644
   notify:
