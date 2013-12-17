@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-if [[ -f /dev/disk/by-label/ephemeral-raid ]]; then
+if [[ -e /dev/disk/by-label/ephemeral-raid ]]; then
     echo "$(basename $0): /dev/disk/by-label/ephemeral-raid exists, quitting"
     exit
 fi
