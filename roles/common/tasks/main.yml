@@ -29,6 +29,7 @@
     - colordiff
     - pydf
     - xfsprogs
+    - mosh
 
 - name: install bashrc
   sudo: no
