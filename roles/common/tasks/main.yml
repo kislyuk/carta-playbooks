@@ -40,4 +40,8 @@
 - name: mount ephemeral storage
   mount: name=/mnt/ephemeral-raid src='LABEL=ephemeral-raid' state=mounted fstype=auto
 
-#      shell: apt-get install --yes  executable=/bin/bash
+- name: remove postfix
+  apt: name=postfix state=absent
+
+- name: remove whoopsie
+  apt: name=whoopsie state=absent
