@@ -7,10 +7,6 @@
     - keychain
     - nginx
     - htop
-    - python-dev
-    - python-pip
-    - python-virtualenv
-    - python-openssl
     - libsnappy-dev
     - git
     - curl
@@ -30,6 +26,30 @@
     - pydf
     - xfsprogs
     - mosh
+    - emacs
+    - nmap
+    - cmake
+    - flex
+    - bison
+    - libpam0g-dev
+    - zlib1g-dev
+    - libbz2-dev
+    - libfuse2
+    - python-dev
+    - python-pip
+    - python-virtualenv
+    - python-openssl
+    - python-crypto
+    - python-numpy
+    - python-scipy
+    - python3-setuptools
+    - python3-dev
+    - python3-crypto
+    - python3-numpy
+    - python3-scipy
+
+- name: install node.js
+  include: install_nodejs.yml
 
 - name: install bashrc
   sudo: no

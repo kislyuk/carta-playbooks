@@ -1,0 +1,12 @@
+# See http://nodejs.org/dist/v0.10.24/SHASUMS.txt
+- set_fact: node_pv=0.10.24
+- set_fact: node_sha=423018f6a60b18d0dddf3007c325e0cc8cf55099
+- set_fact: node_p=node-v{{node_pv}}-linux-x64
+
+- name: install node.js
+  shell: chdir=/opt executable=/bin/bash set -e;
+    curl -O "http://nodejs.org/dist/v{{node_pv}}/{{node_p}}.tar.gz";
+    tar -xzf {{node_p}}.tar.gz;
+    ln -fs {{node_p}} node;
+    [[ $(shasum {{node_p}}.tar.gz|cut -f 1 -d ' ') == {{node_sha}} ]];
+    cd /usr/bin; for i in /opt/node/bin/*; do ln -sf $i; done
