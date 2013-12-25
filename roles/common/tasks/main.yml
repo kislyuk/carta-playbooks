@@ -34,7 +34,9 @@
     - libpam0g-dev
     - zlib1g-dev
     - libbz2-dev
+    - libfuse-dev
     - libfuse2
+    - fuse-utils
     - python-dev
     - python-pip
     - python-virtualenv
