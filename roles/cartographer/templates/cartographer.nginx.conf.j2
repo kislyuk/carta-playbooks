@@ -1,0 +1,17 @@
+server {
+  listen 80;
+  server_name cartographer.us;
+
+  location /static {
+    alias /srv/cartographer/static;
+  }
+
+  location / {
+    include uwsgi_params;
+    uwsgi_pass unix:/run/uwsgi/app/cartographer/socket;
+    uwsgi_param UWSGI_CHDIR /srv/cartographer;
+    uwsgi_param UWSGI_MODULE cartographer;
+    uwsgi_param UWSGI_CALLABLE server;
+    uwsgi_param UWSGI_SCHEME $scheme;
+  }
+}

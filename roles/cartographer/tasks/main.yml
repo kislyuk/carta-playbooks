@@ -10,4 +10,23 @@
   shell: make setup_virtualenv chdir=/srv/cartographer
 
 - name: load cartographer database
-  shell: echo "Will load DB"
+  shell: echo "Will load DB into /var/lib/mongodb"
+
+- name: configure cartographer uwsgi app
+  template:
+    src=cartographer.nginx.conf.j2
+    dest=/etc/nginx/sites-available/cartographer
+
+- file: path=/etc/nginx/sites-enabled/default state=absent
+
+- file: src=/etc/nginx/sites-available/cartographer dest=/etc/nginx/sites-enabled/cartographer state=link
+  notify:
+    - nginx-restart
+
+- template:
+    src=cartographer.uwsgi.json.j2
+    dest=/etc/uwsgi/apps-available/cartographer.json
+
+- file: src=/etc/uwsgi/apps-available/cartographer.json dest=/etc/uwsgi/apps-enabled/cartographer.json state=link
+  notify:
+    - uwsgi-restart

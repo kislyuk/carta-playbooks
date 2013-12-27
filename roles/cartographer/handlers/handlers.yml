@@ -1,0 +1,6 @@
+handlers:
+  - name: nginx-restart
+    service: name=nginx state=restarted
+
+  - name: uwsgi-restart
+    service: name=uwsgi state=restarted

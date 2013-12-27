@@ -1,0 +1,12 @@
+{ "uwsgi": {
+    "plugins": "python",
+    "vhost": "true",
+    "harakiri": 30,
+    "harakiri-verbose": "true",
+    "reload-on-exception": "true",
+    "virtualenv": "/srv/cartographer/env",
+    "pythonpath":  [ "/srv/cartographer/lib/python" ],
+    "post-buffering": 1,
+    "env": [ "PATH=/srv/cartographer/bin:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin" ]
+  }
+}
