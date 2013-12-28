@@ -45,7 +45,10 @@
     - python-crypto
     - python-numpy
     - python-scipy
+    - python-pyxattr
+    - python-fuse
     - uwsgi-plugins-all
+    - attr
 
 - name: install virtualenv
   command: pip install --upgrade virtualenv
