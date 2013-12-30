@@ -7,7 +7,7 @@ fi
 
 RAID_LEVEL=0
 
-EPHEMERAL_DEVICES=($(find /dev/xvd? -type b))
+EPHEMERAL_DEVICES=($(find -regex '/dev/xvd[b-i]' -type b))
 
 echo "Creating RAID${RAID_LEVEL} array on $EPHEMERAL_DEVICES"
 
