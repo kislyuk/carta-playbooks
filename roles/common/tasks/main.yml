@@ -38,7 +38,6 @@
     - libbz2-dev
     - libfuse-dev
     - libfuse2
-    - fuse-utils
     - python-dev
     - python-pip
     - python-openssl
