@@ -1,6 +1,6 @@
 ---
 - name: install base requirements
-  apt: name={{item}} state=installed
+  apt: name={{item}} state=installed update_cache=yes cache_valid_time=900
   with_items:
     - tmux
     - screen
@@ -52,14 +52,14 @@
 - name: install virtualenv
   command: pip install --upgrade virtualenv
 
-- name: install python3.3 PPA
-  apt_repository: repo='ppa:fkrull/deadsnakes'
+#- name: install python3.3 PPA
+#  apt_repository: repo='ppa:fkrull/deadsnakes'
 
-- name: install python3.3
-  apt: name={{item}} state=installed
-  with_items:
-    - python3.3
-    - python3.3-dev
+#- name: install python3.3
+#  apt: name={{item}} state=installed
+#  with_items:
+#    - python3.3
+#    - python3.3-dev
 
 - name: set python3.3 as the default python3
   command: ln -sf /usr/bin/python3.3 /usr/bin/python3
