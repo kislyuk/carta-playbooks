@@ -1,0 +1,53 @@
+# turn off visual bell capability for all terminals (putty's vbell is very annoying)
+termcapinfo * vb@
+vbell on
+vbell_msg !
+nethack on
+defutf8 on
+defencoding UTF-8
+hardcopy_append on
+defmonitor on
+defscrollback 10000
+startup_message off
+nonblock on
+hardstatus on
+altscreen on
+
+backtick 1 0 0 whoami
+
+hardstatus string "%H:%n [%t] %h"
+
+#hardstatus string "%1`@%H:%n [%t] %h"
+#hardstatus "%H  %{= kg}%-Lw%{= Kw}%50>%n%f* %t%{-}%+Lw%< %=%{= kY}%99` %{= kc} %D %d-%M-%y  %c:%s "
+#hardstatus alwayslastline "%H  %{= kg}%-Lw%{= Kw}%50>%n%f* %t%{-}%+Lw%< %=%{= kY}%99` %{= kc} %D %d-%M-%y  %c:%s "
+#hardstatus string "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+#caption always "%{= bb}%{+b w}%n %h %=%t %c"
+
+# This right-aligns what follows:
+#   '%='
+
+# This displays the time (hours and minutes) in 12hr format
+# and adds an AM/PM flag, in bold green:
+#   '%{G}%C%A'
+
+caption always "%>%{kw}%1`@%H %{bw}%?%-Lw%?%{bW}%n*%f %t%?(%u)%?%{bw}%?%+Lw%?%<"
+caption always "%>%{kw}%1`@%H %{bw}%?%-Lw%?%{bW}%n*%f %t%?(%u)%?%{bw}%?%+Lw%? %{kw}%=%Y-%m-%d %c"
+#caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+
+# remove some stupid / dangerous key bindings
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
+# make them better
+bind 'K' kill
+bind 'I' login on
+bind 'O' login off
+bind '}' history
+
+# ctrl+tab, ctrl+shift+tab to switch windows
+bindkey "^[[1;5I" next
+bindkey "^[[1;6I" prev
