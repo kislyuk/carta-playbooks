@@ -1,0 +1,7 @@
+[user]
+        email = kislyuk@gmail.com
+        name = Andrey Kislyuk
+[push]
+        default = simple
+[color]
+        ui = auto
