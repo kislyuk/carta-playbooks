@@ -1,0 +1,5 @@
+[ -f ~/.bashrc ] && . ~/.bashrc
+
+if [[ `who -m` ]] && [[ ! $EUID == 0 ]]; then
+        [ -z "$WINDOW" ] && screen -UxdR
+fi
