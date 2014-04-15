@@ -48,6 +48,8 @@
     - python-fuse
     - uwsgi-plugins-all
     - attr
+    - iptables-persistent
+    - debian-goodies
 
 - name: install virtualenv
   command: pip install --upgrade virtualenv
