@@ -2,7 +2,7 @@
 - name: install base requirements
   apt: name={{item}} state=installed update_cache=yes cache_valid_time=900
   with_items:
-    - tmux
+    - byobu
     - screen
     - keychain
     - nginx
