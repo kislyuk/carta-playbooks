@@ -50,6 +50,7 @@
     - attr
     - iptables-persistent
     - debian-goodies
+    - parallel
 
 - name: install virtualenv
   command: pip install --upgrade virtualenv
