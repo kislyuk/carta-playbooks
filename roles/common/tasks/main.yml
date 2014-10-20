@@ -41,7 +41,6 @@
     - python-dev
     - python-pip
     - python-openssl
-    - python-crypto
     - python-numpy
     - python-scipy
     - python-pyxattr
