@@ -51,7 +51,7 @@
     - debian-goodies
     - parallel
     - ipython
-    
+    - jq
 
 - name: install virtualenv
   command: pip install --upgrade virtualenv
