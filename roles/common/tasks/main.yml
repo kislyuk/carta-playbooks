@@ -54,21 +54,6 @@
     - jq
     - httpie
 
-- name: install virtualenv
-  command: pip install --upgrade virtualenv
-
-#- name: install python3.3 PPA
-#  apt_repository: repo='ppa:fkrull/deadsnakes'
-
-#- name: install python3.3
-#  apt: name={{item}} state=installed
-#  with_items:
-#    - python3.3
-#    - python3.3-dev
-
-- name: set python3.3 as the default python3
-  command: ln -sf /usr/bin/python3.3 /usr/bin/python3
-
 - name: install node.js
   include: install_nodejs.yml
 
