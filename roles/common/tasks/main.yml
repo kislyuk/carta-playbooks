@@ -52,6 +52,7 @@
     - parallel
     - ipython
     - jq
+    - httpie
 
 - name: install virtualenv
   command: pip install --upgrade virtualenv
