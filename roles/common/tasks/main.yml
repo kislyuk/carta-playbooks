@@ -54,7 +54,6 @@
     - jq
     - httpie
     - smartmontools
-    - ufw
     - bridge-utils
     - debootstrap
     - cgmanager-utils
