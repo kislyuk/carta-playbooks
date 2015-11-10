@@ -58,7 +58,8 @@
     - debootstrap
     - cgmanager-utils
     - pixz
-    
+    - libffi-dev
+    - libssl-dev
 
 - name: install node.js
   include: install_nodejs.yml
